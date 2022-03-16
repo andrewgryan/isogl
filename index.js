@@ -60,15 +60,12 @@ Quad.prototype.mount = function (gl) {
     this.vertexArray = gl.createVertexArray();
     gl.bindVertexArray(this.vertexArray);
 
-    // Enable buffers
-    gl.enableVertexAttribArray(positionAttributeLocation);
-    gl.enableVertexAttribArray(colorAttributeLocation);
-
     // Tell WebGL how to pull a_position out of buffer
     const size = 2;
     const normalized = false;
     const stride = 0;
     const offset = 0;
+    gl.enableVertexAttribArray(positionAttributeLocation);
     gl.vertexAttribPointer(
         positionAttributeLocation,
         size,
@@ -78,6 +75,7 @@ Quad.prototype.mount = function (gl) {
         offset
     );
     // Tell WebGL how to pull a_color out of buffer
+    gl.enableVertexAttribArray(colorAttributeLocation);
     gl.vertexAttribPointer(colorAttributeLocation, 4, gl.FLOAT, false, 0, 0);
 };
 
