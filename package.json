@@ -1,12 +1,16 @@
 {
-  "name": "isogl",
-  "version": "0.0.13",
-  "description": "Vertex and fragment shader to draw contours",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+    "name": "isogl",
+    "version": "0.0.15",
+    "description": "Vertex and fragment shader to draw contours",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/andrewgryan/isogl.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC"
 }
