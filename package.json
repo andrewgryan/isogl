@@ -1,6 +1,6 @@
 {
     "name": "isogl",
-    "version": "0.0.18",
+    "version": "0.0.19",
     "description": "Vertex and fragment shader to draw contours",
     "main": "index.js",
     "scripts": {
@@ -12,5 +12,7 @@
     },
     "keywords": [],
     "author": "",
-    "license": "ISC"
+    "license": "ISC",
+    "devDependencies": {
+    }
 }

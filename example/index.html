@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width" />
+        <title>Index</title>
+    </head>
+    <body>
+        <canvas width=300 height=300 id="canvas"></canvas>
+        <script type="module">
+            import { Quad, renderGl } from "../index.js"
+            const el = document.getElementById("canvas")
+            const gl = canvas.getContext("webgl2")
+            const quad = new Quad()
+            renderGl(gl, quad)
+        </script>
+    </body>
+</html>

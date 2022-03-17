@@ -1,4 +1,3 @@
-
 // NOTE: Not a Quad yet
 export function Quad() {
     this.program = null;
@@ -28,7 +27,6 @@ void main() {
 }
 
 Quad.prototype.mount = function (gl) {
-    console.log(this);
     const vertexShader = createShader(gl, gl.VERTEX_SHADER, this.source.vert);
     const fragmentShader = createShader(
         gl,
@@ -38,44 +36,46 @@ Quad.prototype.mount = function (gl) {
     this.program = createProgram(gl, vertexShader, fragmentShader);
 
     // Attributes
+    const positions = [-1, -1, -1, 1, 1, 1, 1, 1, 1, -1, -1, -1];
     const positionAttributeLocation = gl.getAttribLocation(
         this.program,
         "a_position"
     );
     const positionBuffer = gl.createBuffer();
     gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
-    const positions = [0, 0, 1, 0, 1, 1];
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(positions), gl.STATIC_DRAW);
-
-    // Buffer for a_color
-    const colorAttributeLocation = gl.getAttribLocation(
-        this.program,
-        "a_color"
-    );
-    const rgbas = [1, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 1];
-    gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer());
-    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(rgbas), gl.STATIC_DRAW);
 
     // Vertex attribute object
     this.vertexArray = gl.createVertexArray();
     gl.bindVertexArray(this.vertexArray);
 
     // Tell WebGL how to pull a_position out of buffer
-    const size = 2;
-    const normalized = false;
-    const stride = 0;
-    const offset = 0;
     gl.enableVertexAttribArray(positionAttributeLocation);
-    gl.vertexAttribPointer(
-        positionAttributeLocation,
-        size,
-        gl.FLOAT,
-        normalized,
-        stride,
-        offset
+    gl.vertexAttribPointer(positionAttributeLocation, 2, gl.FLOAT, false, 0, 0);
+
+    // Buffer for a_color
+    const colorAttributeLocation = gl.getAttribLocation(
+        this.program,
+        "a_color"
     );
-    // Tell WebGL how to pull a_color out of buffer
+
+    // Bind ARRAY_BUFFER to color location
     gl.enableVertexAttribArray(colorAttributeLocation);
+
+    // Fill buffer with data
+    const rgbas = [
+        1, 1, 0, 1,
+        0, 1, 0, 1,
+        1, 0, 1, 1,
+        1, 0, 1, 1,
+        0, 1, 1, 1,
+        1, 1, 0, 1,
+    ];
+    const colorBuffer = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, colorBuffer);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(rgbas), gl.STATIC_DRAW);
+
+    // Tell WebGL how to pull a_color out of buffer
     gl.vertexAttribPointer(colorAttributeLocation, 4, gl.FLOAT, false, 0, 0);
 };
 
@@ -84,7 +84,7 @@ Quad.prototype.render = function (gl) {
     gl.bindVertexArray(this.vertexArray);
 
     const offset = 0;
-    const count = 3;
+    const count = 6;
     gl.drawArrays(gl.TRIANGLES, offset, count);
 };
 
