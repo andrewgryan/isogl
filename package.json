@@ -1,11 +1,14 @@
 {
     "name": "isogl",
-    "version": "0.0.19",
+    "version": "0.0.20",
     "description": "Vertex and fragment shader to draw contours",
     "main": "index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1"
     },
+    "files": [
+        "index.js"
+    ],
     "repository": {
         "type": "git",
         "url": "https://github.com/andrewgryan/isogl.git"
