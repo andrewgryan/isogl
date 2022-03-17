@@ -8,11 +8,10 @@
     <body>
         <canvas width=300 height=300 id="canvas"></canvas>
         <script type="module">
-            import { Quad, renderGl } from "../index.js"
+            import { Shape, renderGl } from "../index.js"
             const el = document.getElementById("canvas")
             const gl = canvas.getContext("webgl2")
-            const quad = new Quad()
-            renderGl(gl, quad)
+            renderGl(gl, new Shape())
         </script>
     </body>
 </html>
