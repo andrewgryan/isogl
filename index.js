@@ -1,4 +1,3 @@
-// NOTE: Not a Quad yet
 export function Quad() {
     this.program = null;
     this.vertexArray = null;
@@ -65,14 +64,7 @@ Quad.prototype.mount = function (gl) {
     gl.enableVertexAttribArray(texcoordAttributeLocation);
 
     // Fill buffer with data
-    const uvs = [
-        0, 0,
-        0, 1,
-        1, 1,
-        1, 1,
-        1, 0,
-        0, 0
-    ];
+    const uvs = [0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0];
     const texcoordBuffer = gl.createBuffer();
     gl.bindBuffer(gl.ARRAY_BUFFER, texcoordBuffer);
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(uvs), gl.STATIC_DRAW);
@@ -84,16 +76,9 @@ Quad.prototype.mount = function (gl) {
     const px = 5;
     const py = 2;
     const pixels = new Uint8Array([
-        255, 0, 0, 255,
-        255, 0, 64, 255,
-        255, 0, 128, 255,
-        255, 0, 172, 255,
-        255, 0, 255, 255,
-        0, 255, 0, 255,
-        0, 255, 64, 255,
-        0, 255, 128, 255,
-        0, 255, 172, 255,
-        0, 255, 255, 255,
+        255, 0, 0, 255, 255, 0, 64, 255, 255, 0, 128, 255, 255, 0, 172, 255,
+        255, 0, 255, 255, 0, 255, 0, 255, 0, 255, 64, 255, 0, 255, 128, 255, 0,
+        255, 172, 255, 0, 255, 255, 255,
     ]);
     const texture = gl.createTexture();
     gl.bindTexture(gl.TEXTURE_2D, texture);
@@ -108,13 +93,13 @@ Quad.prototype.mount = function (gl) {
         gl.UNSIGNED_BYTE,
         pixels
     );
-    gl.generateMipmap(gl.TEXTURE_2D)
+    gl.generateMipmap(gl.TEXTURE_2D);
 
     // Configure repeat and interpolation of texture
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE)
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE)
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST)
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST)
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
 };
 
 Quad.prototype.render = function (gl) {
