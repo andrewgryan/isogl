@@ -1,3 +1,4 @@
+export { Contour } from "./src/contour.js";
 export { Shape } from "./src/shape.js";
 export { Quad } from "./src/quad.js";
 
