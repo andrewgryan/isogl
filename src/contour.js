@@ -16,17 +16,15 @@ precision highp float;
 in vec2 v_position;
 out vec4 outColor;
 
-float circle(in vec2 _st, in float _radius) {
-  vec2 dist = _st - vec2(0.5);
-  float dr = _radius * 0.01;
-  return 1.0 - smoothstep(_radius - dr, _radius + dr, dot(dist, dist) * 4.0);
-}
 
 void main() {
-    vec2 rg = (0.5 * v_position.xy) + 0.5;
+    vec3 k = vec3(v_position.x, v_position.y, v_position.x*(v_position.y + 0.5));
+    vec3 f = fract(k * 10.0);
+    vec3 df = fwidth(k * 10.0);
+    vec3 g = smoothstep(df * 1.0, df * 2.0, f);
+    float c = g.z;
 
-    // Circle
-    outColor = vec4(circle(rg, 0.9)) * vec4(0.8, 0.2, 0.2, 1.0);
+    outColor = vec4(c, c, c, 1.0);
 
 }`;
 
