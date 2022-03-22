@@ -6,12 +6,52 @@
         <title>Index</title>
     </head>
     <body>
-        <canvas width=300 height=300 id="canvas"></canvas>
+        <div class="relative h-screen flex flex-col space-y-2 bg-gray-100 p-2">
+            <div class="flex-grow shadow-lg">
+                <canvas class="h-full w-full" id="canvas"></canvas>
+            </div>
+            <div
+                class="
+                    absolute
+                    bottom-0
+                    left-1/2
+                    flex flex-row
+                    justify-center
+                    p-2
+                    text-sm
+                    uppercase
+                "
+            >
+                <div
+                    id="btn"
+                    class="bg-blue-500 text-gray-100 p-4 cursor-pointer"
+                >
+                    Button
+                </div>
+            </div>
+        </div>
         <script type="module">
-            import { Contour, renderGl } from "../index.js"
-            const el = document.getElementById("canvas")
-            const gl = canvas.getContext("webgl2")
-            renderGl(gl, new Contour())
+            import "./style.css";
+            import { Contour, renderGl } from "../index.js";
+            const el = document.getElementById("canvas");
+            const gl = canvas.getContext("webgl2");
+            renderGl(gl, new Contour());
+
+            // Web worker
+            // const worker = new Worker("worker.js", { type: "module" });
+            import MyWorker from "./worker.js?worker"
+            console.log(MyWorker)
+            const worker = new MyWorker()
+
+            worker.addEventListener("message", (e) => {
+                console.log("main thread", e.data);
+            });
+            document.getElementById("btn").addEventListener("click", () => {
+                const msg = {
+                    hello: "World!",
+                };
+                worker.postMessage(msg);
+            });
         </script>
     </body>
 </html>

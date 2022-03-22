@@ -7,6 +7,9 @@ export function renderGl(gl, mesh) {
     gl.clearColor(0.1, 0.1, 0.1, 0);
     gl.clear(gl.COLOR_BUFFER_BIT);
 
+    gl.canvas.width = gl.canvas.clientWidth;
+    gl.canvas.height = gl.canvas.clientHeight;
+
     // re-shape canvas viewport
     gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
 

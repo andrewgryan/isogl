@@ -18,14 +18,7 @@ out vec4 outColor;
 
 
 void main() {
-    vec3 k = vec3(v_position.x, v_position.y, v_position.x*(v_position.y + 0.5));
-    vec3 f = fract(k * 10.0);
-    vec3 df = fwidth(k * 10.0);
-    vec3 g = smoothstep(df * 1.0, df * 2.0, f);
-    float c = g.z;
-
-    outColor = vec4(c, c, c, 1.0);
-
+    outColor = vec4(0.1, 0.1, 0.1, 1.0);
 }`;
 
         this.program = null;
